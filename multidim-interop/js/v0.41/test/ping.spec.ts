@@ -82,6 +82,8 @@ describe('ping test', () => {
         break
       case 'quic':
         break
+      case 'webrtc':
+        break
       default:
         throw new Error(`Unknown muxer: ${MUXER}`)
     }
