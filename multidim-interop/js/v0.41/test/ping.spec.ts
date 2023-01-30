@@ -6,6 +6,7 @@ import { createLibp2p, Libp2pOptions } from 'libp2p'
 import { webTransport } from '@libp2p/webtransport'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
+import { webRTC } from '@libp2p/webrtc'
 import { noise } from '@chainsafe/libp2p-noise'
 import { mplex } from '@libp2p/mplex'
 import { yamux } from '@chainsafe/libp2p-yamux'
@@ -51,6 +52,11 @@ describe('ping test', () => {
           listen: isDialer ? [] : [`/ip4/${IP}/tcp/0/ws`]
         }
         break
+      case 'webrtc':
+        options.transports = [webRTC()]
+        options.addresses = {
+          listen: isDialer ? [] : [`/ip4/${IP}/udp/0/webrtc`]
+        }
       default:
         throw new Error(`Unknown transport: ${TRANSPORT}`)
     }
