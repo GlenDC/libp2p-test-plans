@@ -17,6 +17,7 @@ import (
 	libp2ptls "github.com/libp2p/go-libp2p/p2p/security/tls"
 	libp2pquic "github.com/libp2p/go-libp2p/p2p/transport/quic"
 	"github.com/libp2p/go-libp2p/p2p/transport/tcp"
+	libp2pwebrtc "github.com/libp2p/go-libp2p/p2p/transport/webrtc"
 	"github.com/libp2p/go-libp2p/p2p/transport/websocket"
 	libp2pwebtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
 	ma "github.com/multiformats/go-multiaddr"
@@ -77,6 +78,9 @@ func main() {
 	case "tcp":
 		options = append(options, libp2p.Transport(tcp.NewTCPTransport))
 		listenAddr = fmt.Sprintf("/ip4/%s/tcp/0", ip)
+	case "webrtc":
+		options = append(options, libp2p.Transport(libp2pwebrtc.New))
+		listenAddr = fmt.Sprintf("/ip4/%s/udp/0/webrtc", ip)
 	case "quic":
 		options = append(options, libp2p.Transport(libp2pquic.NewTransport))
 		listenAddr = fmt.Sprintf("/ip4/%s/udp/0/quic", ip)
