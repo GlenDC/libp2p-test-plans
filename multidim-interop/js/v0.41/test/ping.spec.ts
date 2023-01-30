@@ -82,8 +82,6 @@ describe('ping test', () => {
         break
       case 'quic':
         break
-      case 'webrtc':
-        break
       default:
         throw new Error(`Unknown muxer: ${MUXER}`)
     }
@@ -108,8 +106,12 @@ describe('ping test', () => {
           throw new Error("Failed to wait for dialer to finish")
         }
       }
-    } catch (err) {
-      console.error(`unexpected exception in ping test: ${err}`)
+    } catch (err: any) {
+      if (err instanceof AggregateError) {
+        console.error(`unexpected exception in ping test: ${err}\n Errors: ${err.errors}`)
+      } else {
+        console.error(`unexpected exception in ping test: ${err}`)
+      }
       throw err
     } finally {
       try {

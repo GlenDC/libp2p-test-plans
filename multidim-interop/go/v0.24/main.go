@@ -111,7 +111,6 @@ func main() {
 	case "mplex":
 		options = append(options, libp2p.Muxer("/mplex/6.7.0", mplex.DefaultTransport))
 	case "quic":
-	case "webrtc":
 	default:
 		panic("Unsupported muxer")
 	}
